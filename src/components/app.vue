@@ -41,10 +41,11 @@
 <template>
     <div>
         <div class="main">
+            <div class="panel-t">言语</div>
             <text></text>
-            <list></list>
-            <page></page>    
+            <list></list>    
         </div>
+        <page></page>
     </div>
 </template>
 
@@ -55,8 +56,21 @@
         
         .main {
             max-width: 768px;
-            margin: 0 auto;
-            background-color: #eee;
+            margin: 8px auto;
+            background-color: #fff;
+            border-color: #ddd;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 1px 1px rgba(0,0,0,.05);
+
+            .panel-t{
+                color: #333;
+                background-color: #f5f5f5;
+                padding: 10px 15px;
+                border-bottom: 1px solid #ddd;
+                border-top-left-radius: 3px;
+                border-top-right-radius: 3px;
+            }
         }
     }
 </style>

@@ -40,8 +40,7 @@
     .m-list {
         li {
             padding: 12px 15px;
-            border-bottom: 1px solid #292C33;
-            cursor: pointer;
+            border-bottom: 1px solid #ddd;
             transition: background-color .1s;
             
             &:hover {
