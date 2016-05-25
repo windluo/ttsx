@@ -1,10 +1,4 @@
 <script>
-    import store from '../store';
-    import card from './card';
-    import list from './list';
-    import text from './text';
-    import message from './message';
-
     export default {
         el: '#chat',
         data () {
