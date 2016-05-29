@@ -1,16 +1,21 @@
 <script>
+import comment from './comment';
+
     export default {
         data (){
 
             return {
                 list:[
-                    {message:'111'},
-                    {message:'222'},
-                    {message:'333'},
-                    {message:'444'},
-                    {message:'555'}
+                    {name:'不怎么样',head:'public/images/header/myface.png',time:'2016-05-26 22:23:10',content:'这里还开着呢，都快忘了'},
+                    {name:'不怎么样',head:'public/images/header/myface.png',time:'2016-05-26 22:23:10',content:'hahaha ..'},
+                    {name:'不怎么样',head:'public/images/header/myface.png',time:'2016-05-26 22:23:10',content:'hahaha ..'},
+                    {name:'不怎么样',head:'public/images/header/myface.png',time:'2016-05-26 22:23:10',content:'hahaha ..'},
+                    {name:'不怎么样',head:'public/images/header/myface.png',time:'2016-05-26 22:23:10',content:'hahaha ..'}
                 ]
             }
+        },
+        components: {
+            comment
         }
         // props: ['userList', 'sessionIndex', 'session', 'search'],
         // methods: {
@@ -28,9 +33,21 @@
 
 <template>
     <div class="m-list">
-        <ul>
+        <ul class="m-list-ul">
             <li v-for="item in list">
-                <p>{{item.message}}</p>
+                <div class="u-info">
+                    <div class="u-head">
+                        <a href="javascript:;">
+                            <img :src="item.head" alt="{{item.name}}">
+                        </a>
+                    </div>
+                    <div class="u-name">
+                        <a href="javascript:;" class="name">{{item.name}}</a>
+                        <div class="p-time">{{item.time}}</div>
+                    </div>
+                </div>
+                <div class="msg-content">{{item.content}}</div>
+                <comment></comment>
             </li>
         </ul>
     </div>
@@ -38,27 +55,47 @@
 
 <style lang="less">
     .m-list {
+        .m-list-ul{
+            border-top: 1px solid #ddd;
+        }
         li {
-            padding: 12px 15px;
             border-bottom: 1px solid #ddd;
-            transition: background-color .1s;
             
-            &:hover {
-                background-color: rgba(255, 255, 255, 0.03);
+            .u-info{
+                padding: 12px 15px 8px 15px;
+                .u-head{
+                    height: 50px;
+                    width: 50px;
+                    float: left;
+                    a{
+                        display: block;
+                        width: 100%;
+                        height: 100%;
+                    }
+                    img{
+                        border-radius: 4px;
+                    }
+                }
+                .u-name{
+                    margin-left: 56px;
+                    a{
+                        color: #337ab7;
+                        &:focus,&:hover{
+                            color: #23527c;
+                            text-decoration: underline; 
+                        }
+                    }
+                    .p-time{
+                        color: #8c7e83;
+                        font-size: 12px;
+                        margin-top: 8px;
+                    }
+                }
             }
-            &.active {
-                background-color: rgba(255, 255, 255, 0.1);
+
+            .msg-content{
+                padding: 0 15px 12px 15px;
             }
-        }
-        .avatar, .name {
-            vertical-align: middle;
-        }
-        .avatar {
-            border-radius: 2px;
-        }
-        .name {
-            display: inline-block;
-            margin: 0 0 0 15px;
         }
     }
 </style>

@@ -8,11 +8,21 @@
                 text: ''
             };
         },
+        props: ['view'],
         methods: {
-
+            hideComment (event){
+                // if(event.target.value==''){
+                //     console.log('关闭');
+                //     console.log(this.view);
+                //     this.view = 'no-text';
+                // }
+            }
         },
         components: {
             face
+        },
+        ready () {
+            this.$els.textarea.focus();
         }
         
     };
@@ -21,7 +31,7 @@
 <template>
     <div class="m-text">
         <div class="m-input">
-            <textarea placeholder="说点什么..." v-model="text"></textarea>
+            <textarea v-el:textarea placeholder="说点什么..." v-model="text" @blur="hideComment($event)"></textarea>
             <a href="javascript:;" class="btn fr">发表</a>
             <face></face>
         </div>
@@ -31,11 +41,10 @@
 <style lang="less">
     .m-text {
         font-size: 12px;
-        border-bottom: 1px solid #ddd;
 
         .m-input{
-            margin: 8px 15px;
-            padding: 5px 0;
+            margin: 8px 15px 0;
+            padding: 5px 0 8px;
         }
 
         textarea {
