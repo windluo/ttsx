@@ -2,24 +2,45 @@
 
     import face from './face.vue';
 
+    var noFace = Vue.extend({
+        template: '<div class="face"></div>'
+    })
+
     export default {
         data () {
             return {
-                text: ''
+                text: '',
+                faceView: 'no-face'
             };
         },
-        props: ['view'],
         methods: {
-            hideComment (event){
-                // if(event.target.value==''){
-                //     console.log('关闭');
-                //     console.log(this.view);
-                //     this.view = 'no-text';
-                // }
+            showFace (event){
+                console.log(event.target.className);
+                if(this.faceView != 'face'){
+                    this.faceView = 'face';
+                    document.addEventListener('mousedown',this.closeFace)
+                }
+            },
+            closeFace (event){
+                var parent = event.target.parentElement;
+                if(parent && parent.parentElement){
+                    var cls = parent.parentElement.className;
+                    var cls2 = parent.className;
+                    if(cls != 'face-content' && cls2 != 'face-content'){
+                        document.removeEventListener('mousedown',this.closeFace);
+                        this.faceView = 'no-face';
+                    }
+                }
             }
         },
         components: {
-            face
+            face,noFace
+        },
+        events: {
+            'setEmjoy' (item){
+                this.text += item;
+                this.faceView = 'no-face';
+            }
         },
         ready () {
             this.$els.textarea.focus();
@@ -31,9 +52,9 @@
 <template>
     <div class="m-text">
         <div class="m-input">
-            <textarea v-el:textarea placeholder="说点什么..." v-model="text" @blur="hideComment($event)"></textarea>
+            <textarea v-el:textarea placeholder="说点什么..." v-model="text"></textarea>
             <a href="javascript:;" class="btn fr">发表</a>
-            <face></face>
+            <component :is="faceView" @click="showFace($event)"></component>
         </div>
     </div>
 </template>

@@ -5,17 +5,24 @@ import comment from './comment';
         data (){
 
             return {
-                list:[
-                    {name:'不怎么样',head:'public/images/header/myface.png',time:'2016-05-26 22:23:10',content:'这里还开着呢，都快忘了'},
-                    {name:'不怎么样',head:'public/images/header/myface.png',time:'2016-05-26 22:23:10',content:'hahaha ..'},
-                    {name:'不怎么样',head:'public/images/header/myface.png',time:'2016-05-26 22:23:10',content:'hahaha ..'},
-                    {name:'不怎么样',head:'public/images/header/myface.png',time:'2016-05-26 22:23:10',content:'hahaha ..'},
-                    {name:'不怎么样',head:'public/images/header/myface.png',time:'2016-05-26 22:23:10',content:'hahaha ..'}
-                ]
+
+            }
+        },
+        props: ['item','index'],
+        methods: {
+            openComment (){
+                var list = this.$parent.$refs.list;
+                var edit = this.$parent.edit;
+                if(edit != -1){
+                    list[edit].$children[0].closeComment();
+                }
+                this.$parent.edit = this.index;
             }
         },
         components: {
             comment
+        },
+        ready (){
         }
         // props: ['userList', 'sessionIndex', 'session', 'search'],
         // methods: {
@@ -32,25 +39,21 @@ import comment from './comment';
 </script>
 
 <template>
-    <div class="m-list">
-        <ul class="m-list-ul">
-            <li v-for="item in list">
-                <div class="u-info">
-                    <div class="u-head">
-                        <a href="javascript:;">
-                            <img :src="item.head" alt="{{item.name}}">
-                        </a>
-                    </div>
-                    <div class="u-name">
-                        <a href="javascript:;" class="name">{{item.name}}</a>
-                        <div class="p-time">{{item.time}}</div>
-                    </div>
-                </div>
-                <div class="msg-content">{{item.content}}</div>
-                <comment></comment>
-            </li>
-        </ul>
-    </div>
+    <li class="m-list-li">
+        <div class="u-info">
+            <div class="u-head">
+                <a href="javascript:;">
+                    <img :src="item.head" alt="{{item.name}}">
+                </a>
+            </div>
+            <div class="u-name">
+                <a href="javascript:;" class="name">{{item.name}}</a>
+                <div class="p-time">{{item.time}}</div>
+            </div>
+        </div>
+        <div class="msg-content">{{item.content}}</div>
+        <comment @open="openComment"></comment>
+    </li>
 </template>
 
 <style lang="less">
@@ -58,7 +61,7 @@ import comment from './comment';
         .m-list-ul{
             border-top: 1px solid #ddd;
         }
-        li {
+        .m-list-li {
             border-bottom: 1px solid #ddd;
             
             .u-info{

@@ -11,6 +11,14 @@
             return {
                 // 登录用户
                 // user: serverData.user
+                list:[
+                    {id:'1',name:'不怎么样',head:'public/images/header/myface.png',time:'2016-05-26 22:23:10',content:'这里还开着呢，都快忘了'},
+                    {id:'2',name:'不怎么样',head:'public/images/header/myface.png',time:'2016-05-26 22:23:10',content:'hahaha ..'},
+                    {id:'3',name:'不怎么样',head:'public/images/header/myface.png',time:'2016-05-26 22:23:10',content:'hahaha ..'},
+                    {id:'4',name:'不怎么样',head:'public/images/header/myface.png',time:'2016-05-26 22:23:10',content:'hahaha ..'},
+                    {id:'5',name:'不怎么样',head:'public/images/header/myface.png',time:'2016-05-26 22:23:10',content:'hahaha ..'}
+                ],
+                edit: -1 //正在编辑的框
             };
         },
         computed: {
@@ -33,6 +41,9 @@
         },
         components: {
             text, list, page
+        },
+        ready (){
+            console.log(this.$refs.list);
         }
     };
 
@@ -43,7 +54,11 @@
         <div class="main">
             <div class="panel-t">言语</div>
             <text></text>
-            <list></list>    
+            <div class="m-list">
+                <ul class="m-list-ul">
+                    <list v-for="item in list" :item="item" :index="$index" v-ref:list></list>
+                </ul>
+            </div> 
         </div>
         <page></page>
     </div>

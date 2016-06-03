@@ -13,19 +13,25 @@
                     {user:'你',msg:'hah'},
                     {user:'你',msg:'hah',to:'女神'}
                 ],
-                currentView:'no-text'
+                currentView: 'no-text'
             };
         },
         methods: {
             showComment (){
                 if(this.currentView == "no-text"){
                     this.currentView = "text";
-                    console.log(this.$children[0]);
+                    this.$emit('open');
                 }
+            },
+            closeComment (){
+                this.currentView = "no-text";
             }
         },
         components:{
             text,noText
+        },
+        ready (){
+            console.log(this.isShow);
         }
     };
 </script>
@@ -43,7 +49,7 @@
                 <span class="reply-icon" @click="showComment"></span>
             </li>
         </ul>
-        <component :is="currentView" :view.sync="currentView">
+        <component :is="currentView"></component>
     </div>
 </template>
 
@@ -95,6 +101,13 @@
 
         .no-text{
             height: 6px;
+        }
+
+        .fade-transition {
+            transition: opacity .1s ease;
+        }
+        .fade-enter, .fade-leave {
+            opacity: 0;
         }
     }
 </style>
