@@ -17,3 +17,8 @@ git push -u origin master
 
 #今天星期三
 开始重构网页
+
+#20160603
+>用vue组建搭建通信
+>添加表情
+>试试更新markdown
